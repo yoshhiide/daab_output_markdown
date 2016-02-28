@@ -49,8 +49,7 @@ const textFunc = (res, msg) => {
       res.send({
         path: MD_OUTPUT_PATH,
         name: 'create_from_bot.pdf',
-        type: 'application/pdf',
-        text: 'PDFに変換しました。'
+        type: 'application/pdf'
       });
     });
 };
