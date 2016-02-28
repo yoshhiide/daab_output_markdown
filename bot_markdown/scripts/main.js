@@ -28,7 +28,10 @@ module.exports = (robot) => {
     const msg = defaultHear(res);
     if (msg === false) return;
 
-    textFunc(res, msg);
+    // 1文字目が'#'の場合にPDF変換
+    if (msg[0] === '#') {
+      textFunc(res, msg);
+    }
   });
 };
 
