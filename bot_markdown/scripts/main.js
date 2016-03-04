@@ -2,24 +2,18 @@
 //   Utility commands surrounding Hubot uptime.
 'use strict';
 
-const DEBUG_LOG = true;
-
 // module
-//const fs = require('fs');
-//const util = require('util');
-const _ = require('lodash');
 const md = require('markdown-pdf');
 
+// 定数
 const MD_OUTPUT_PATH = 'create_from_bot.pdf';
 
 
 module.exports = (robot) => {
   
-  //----------------------テストロジック(start)---------------------
-  robot.respond(/PING$/i, (res) => {
+  robot.hear(/PING$/i, (res) => {
     res.send('PONG');
   });
-  //----------------------テストロジック(end)-----------------------
   
   // ----------------------------
   //    テキスト受信
@@ -69,7 +63,7 @@ const defaultHear = (res) => {
   if (/^\{[\s\S]+\}$/.test(msg)) return false;
   
   // トークルーム名の変更を対象外に
-  if (_.isNull(res.message.id)) return false;
+  if (res.message.id === null) return false;
   
   // 改行と前後のスペースは不要なので取り除き
   let msg2 = msg.replace(/[\n\r]/g, ' ');
@@ -83,20 +77,4 @@ const defaultHear = (res) => {
   }
   
   return msg;
-};
-
-// エラー処理
-const errorFunc = (errMsg) => {
-  try {
-    throw new Error(errMsg);
-  } catch(e) {
-    log(e);
-  }
-};
-
-// デバッグメッセージ
-const log = (debugMsg) => {
-  if (DEBUG_LOG) {
-    console.log(debugMsg);
-  }
 };
